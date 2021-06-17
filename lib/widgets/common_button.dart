@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CommonButton extends StatelessWidget {
-  const CommonButton({required this.text, required this.color, this.routeName})
+  const CommonButton({required this.text, required this.color, this.action})
       : super();
   final Color color;
   final String text;
-  final String? routeName;
+  final Function()? action;
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +16,7 @@ class CommonButton extends StatelessWidget {
             padding:
                 MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 20)),
             backgroundColor: MaterialStateProperty.all(color)),
-        onPressed: () {
-          if (routeName != null) {
-            Navigator.pushNamed(context, routeName!);
-          }
-        },
+        onPressed: action != null ? action : () {},
         child: Text(
           text,
           style: TextStyle(fontSize: 19),

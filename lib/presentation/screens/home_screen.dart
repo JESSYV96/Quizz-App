@@ -16,7 +16,10 @@ class HomeScreen extends StatelessWidget {
         children: [
           Column(
             children: [
-              MainButton(text: "Jouer", routeName: '/game',),
+              MainButton(
+                text: "Jouer",
+                routeName: '/game',
+              ),
               SizedBox(height: 30),
               MainButton(text: "Classement"),
               SizedBox(height: 30),
@@ -26,7 +29,9 @@ class HomeScreen extends StatelessWidget {
           CommonButton(
             text: "Options",
             color: Color(0xFFD33920),
-            routeName: '/options',
+            action: () {
+              Navigator.pushNamed(context, '/options');
+            },
           )
         ],
       ),
