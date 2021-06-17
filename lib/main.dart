@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'screens/game_screen.dart';
-import 'screens/home_screen.dart';
-import 'screens/options_screen.dart';
+import 'presentation/screens/game_screen.dart';
+import 'presentation/screens/home_screen.dart';
+import 'presentation/screens/options_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,11 +13,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        textTheme: TextTheme(
-          bodyText1: TextStyle(color: Colors.white),
-        ),
-      ),
       routes: {
         '/': (context) => HomeScreen(),
         '/game': (context) => GameScreen(),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'layouts/default_layout.dart';
+import '../layouts/default_layout.dart';
 
 class GameScreen extends StatelessWidget {
   const GameScreen({Key? key}) : super(key: key);

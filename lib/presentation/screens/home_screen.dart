@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quizz_app/widgets/common_button.dart';
 import 'package:quizz_app/widgets/main_button.dart';
 
-import 'layouts/default_layout.dart';
+import '../layouts/default_layout.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
