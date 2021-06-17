@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizz_app/widgets/common_button.dart';
 import 'package:quizz_app/widgets/main_button.dart';
 
 import 'layouts/default_layout.dart';
@@ -15,29 +16,17 @@ class HomeScreen extends StatelessWidget {
         children: [
           Column(
             children: [
-              MainButton(text: "Jouer"),
+              MainButton(text: "Jouer", routeName: '/game',),
               SizedBox(height: 30),
               MainButton(text: "Classement"),
               SizedBox(height: 30),
               MainButton(text: "Proposer une question"),
             ],
           ),
-          Container(
-            width: double.infinity,
-            child: ElevatedButton(
-              style: ButtonStyle(
-                  padding: MaterialStateProperty.all(
-                      EdgeInsets.symmetric(vertical: 20)),
-                  backgroundColor:
-                      MaterialStateProperty.all(Color(0xFFD33920))),
-              onPressed: () {
-                Navigator.pushNamed(context, '/options');
-              },
-              child: Text(
-                "Options",
-                style: TextStyle(fontSize: 19),
-              ),
-            ),
+          CommonButton(
+            text: "Options",
+            color: Color(0xFFD33920),
+            routeName: '/options',
           )
         ],
       ),

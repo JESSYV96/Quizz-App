@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'screens/game_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/options_screen.dart';
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/': (context) => HomeScreen(),
+        '/game': (context) => GameScreen(),
         '/options': (context) => OptionsScreen()
       },
       initialRoute: '/',

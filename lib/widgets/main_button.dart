@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class MainButton extends StatelessWidget {
   final String text;
-  const MainButton({required this.text}) : super();
+  final String? routeName;
+  const MainButton({required this.text, this.routeName}) : super();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,11 @@ class MainButton extends StatelessWidget {
           text,
           style: TextStyle(color: Colors.white, fontSize: 19),
         ),
-        onPressed: () {},
+        onPressed: () {
+          if(routeName != null) {
+            Navigator.pushNamed(context, routeName!);
+          }
+        },
       ),
     );
   }
