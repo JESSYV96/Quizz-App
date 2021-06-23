@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class DefaultLayout extends StatelessWidget {
-  const DefaultLayout({Key? key, this.appBar, required this.screen})
+  const DefaultLayout({Key? key, this.appBar, required this.screen, this.bottomNavigationBar})
       : super(key: key);
 
   final AppBar? appBar;
+  final BottomNavigationBar? bottomNavigationBar;
   final Widget screen;
 
   @override
@@ -18,6 +19,7 @@ class DefaultLayout extends StatelessWidget {
           child: this.screen,
         ),
       ),
+      bottomNavigationBar: this.bottomNavigationBar,
     );
   }
 }
