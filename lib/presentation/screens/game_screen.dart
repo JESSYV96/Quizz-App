@@ -5,12 +5,39 @@ import 'package:quizz_app/widgets/game/game_header.dart';
 
 import '../layouts/default_layout.dart';
 
-class GameScreen extends StatelessWidget {
-  //const GameScreen({Key? key}) : super(key: key);
-  static const double sizeIcon = 37;
-  static const Color colorIcon = Color(0xFF8a4fe2);
+class GameScreen extends StatefulWidget {
+  @override
+  _GameScreenState createState() => _GameScreenState();
+}
+
+class _GameScreenState extends State<GameScreen> {
   @override
   Widget build(BuildContext context) {
+    Future<void> _showGameResetDialog() async {
+      return showDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Voulez-vous vraiment quitter ?'),
+              actions: [
+                TextButton(
+                  child: Text('Non'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                TextButton(
+                  child: Text('Oui'),
+                  onPressed: () {
+                    Navigator.popUntil(context, (route) => route.isFirst);
+                  },
+                ),
+              ],
+            );
+          });
+    }
+
     return DefaultLayout(
       appBar: null,
       screen: Container(
@@ -19,36 +46,49 @@ class GameScreen extends StatelessWidget {
           children: [GameHeader(), GameBody(), GameAnswer()],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color(0xFF333151),
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              size: sizeIcon,
-              color: colorIcon,
+      bottomBar: BottomAppBar(
+        color: Color(0xFF333151),
+        child: IconTheme(
+          data: IconThemeData(color: Color(0xFF8a4fe2), size: 40),
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 0, vertical: 6),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    _showGameResetDialog();
+                  },
+                  icon: Icon(
+                    Icons.home,
+                    size: 40,
+                    // color: colorIcon,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    print("joker");
+                  },
+                  icon: Icon(
+                    Icons.lightbulb_sharp,
+                    size: 40,
+                    // color: colorIcon,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    print("Change parameters");
+                  },
+                  icon: Icon(
+                    Icons.settings,
+                    size: 40,
+                    // color: colorIcon,
+                  ),
+                ),
+              ],
             ),
-            label: '',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.lightbulb_sharp,
-              size: sizeIcon,
-              color: colorIcon,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.settings,
-              size: sizeIcon,
-              color: colorIcon,
-            ),
-            label: '',
-          ),
-        ],
+        ),
       ),
     );
   }
