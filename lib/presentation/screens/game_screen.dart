@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quizz_app/business_logic/life/cubit/life_cubit.dart';
 import 'package:quizz_app/widgets/game/game_body.dart';
 import 'package:quizz_app/widgets/game/game_answer.dart';
 import 'package:quizz_app/widgets/game/game_header.dart';
@@ -40,10 +42,13 @@ class _GameScreenState extends State<GameScreen> {
 
     return DefaultLayout(
       appBar: null,
-      screen: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [GameHeader(), GameBody(), GameAnswer()],
+      screen: BlocProvider<LifeCubit>(
+        create: (context) => LifeCubit(),
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [GameHeader(), GameBody(), GameAnswer()],
+          ),
         ),
       ),
       bottomBar: BottomAppBar(

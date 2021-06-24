@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quizz_app/business_logic/life/cubit/life_cubit.dart';
 
 class GameHeader extends StatelessWidget {
   //const GameHeader({Key? key}) : super(key: key);
@@ -27,17 +29,29 @@ class GameHeader extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Icon(
-                    Icons.favorite_rounded,
-                    color: Colors.white,
-                  ),
-                  Icon(
-                    Icons.favorite_rounded,
-                    color: Colors.white,
-                  ),
-                  Icon(
-                    Icons.favorite_rounded,
-                    color: Colors.white,
+                  BlocBuilder<LifeCubit, LifeState>(
+                    builder: (context, state) {
+                      if (state is LifeInitial) {
+                        return Container(
+                          height: 25,
+                          child: ListView.builder(
+                              itemCount: state.lifeNumber,
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, int index) {
+                                return Icon(
+                                  Icons.favorite_rounded,
+                                  size: 30,
+                                  color: Colors.white,
+                                );
+                              }),
+                        );
+                      }
+                      return Container(
+                        child: Text("ok"),
+                      );
+                    },
                   ),
                 ],
               )
