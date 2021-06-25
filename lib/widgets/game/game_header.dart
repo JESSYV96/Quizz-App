@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quizz_app/business_logic/life/cubit/life_cubit.dart';
+import 'package:quizz_app/business_logic/score/cubit/score_cubit.dart';
 
 class GameHeader extends StatelessWidget {
   //const GameHeader({Key? key}) : super(key: key);
@@ -66,13 +67,17 @@ class GameHeader extends StatelessWidget {
                   fontSize: 12,
                 ),
               ),
-              Text(
-                '0',
-                style: TextStyle(
-                  fontSize: 28,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                ),
+              BlocBuilder<ScoreCubit, ScoreState>(
+                builder: (scoreContext, state) {
+                  return Text(
+                    '${scoreContext.read<ScoreCubit>().score}',
+                    style: TextStyle(
+                      fontSize: 28,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  );
+                },
               ),
             ],
           ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quizz_app/business_logic/joker/cubit/joker_cubit.dart';
 import 'package:quizz_app/business_logic/life/cubit/life_cubit.dart';
+import 'package:quizz_app/business_logic/score/cubit/score_cubit.dart';
 
 class DefaultLayout extends StatelessWidget {
   const DefaultLayout(
@@ -20,8 +21,11 @@ class DefaultLayout extends StatelessWidget {
           create: (context) => LifeCubit(lifeNumber: 3),
         ),
         BlocProvider<JokerCubit>(
-          create: (context) => JokerCubit(nbJoker: 5),
+          create: (context) => JokerCubit(nbJoker: 2),
         ),
+        BlocProvider<ScoreCubit>(
+          create: (context) => ScoreCubit(score: 0),
+        )
       ],
       child: Scaffold(
         appBar: this.appBar,
