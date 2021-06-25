@@ -48,9 +48,7 @@ class GameHeader extends StatelessWidget {
                               }),
                         );
                       }
-                      return Container(
-                        child: Text("ok"),
-                      );
+                      return Container();
                     },
                   ),
                 ],

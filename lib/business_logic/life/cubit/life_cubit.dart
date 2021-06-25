@@ -4,5 +4,6 @@ import 'package:meta/meta.dart';
 part 'life_state.dart';
 
 class LifeCubit extends Cubit<LifeState> {
-  LifeCubit() : super(LifeInitial(lifeNumber: 3));
+  final int lifeNumber;
+  LifeCubit({required this.lifeNumber}) : super(LifeInitial(lifeNumber: lifeNumber));
 }

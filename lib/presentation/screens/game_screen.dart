@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quizz_app/business_logic/life/cubit/life_cubit.dart';
+import 'package:quizz_app/business_logic/joker/cubit/joker_cubit.dart';
 import 'package:quizz_app/widgets/game/game_body.dart';
 import 'package:quizz_app/widgets/game/game_answer.dart';
 import 'package:quizz_app/widgets/game/game_header.dart';
@@ -40,15 +40,40 @@ class _GameScreenState extends State<GameScreen> {
           });
     }
 
+    Future<void> _showGameJokerDialog(BuildContext jokerContext) async {
+      return showDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Souhaitez-vous utiliser un joker ?'),
+              content: Text(
+                  'Joker restants : ${jokerContext.read<JokerCubit>().nbJoker}'),
+              actions: [
+                TextButton(
+                  child: Text('Non'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                TextButton(
+                  child: Text('Oui'),
+                  onPressed: () {
+                    print('Joker -1 and next question');
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          });
+    }
+
     return DefaultLayout(
       appBar: null,
-      screen: BlocProvider<LifeCubit>(
-        create: (context) => LifeCubit(),
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [GameHeader(), GameBody(), GameAnswer()],
-          ),
+      screen: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [GameHeader(), GameBody(), GameAnswer()],
         ),
       ),
       bottomBar: BottomAppBar(
@@ -70,15 +95,19 @@ class _GameScreenState extends State<GameScreen> {
                     // color: colorIcon,
                   ),
                 ),
-                IconButton(
-                  onPressed: () {
-                    print("joker");
+                BlocBuilder<JokerCubit, JokerState>(
+                  builder: (jokerContext, state) {
+                    return IconButton(
+                      onPressed: () {
+                        _showGameJokerDialog(jokerContext);
+                      },
+                      icon: Icon(
+                        Icons.lightbulb_sharp,
+                        size: 40,
+                        // color: colorIcon,
+                      ),
+                    );
                   },
-                  icon: Icon(
-                    Icons.lightbulb_sharp,
-                    size: 40,
-                    // color: colorIcon,
-                  ),
                 ),
                 IconButton(
                   onPressed: () {
