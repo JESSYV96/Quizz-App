@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quizz_app/business_logic/joker/cubit/joker_cubit.dart';
+import 'package:quizz_app/business_logic/game_logic/joker/cubit/joker_cubit.dart';
 import 'package:quizz_app/widgets/game/game_body.dart';
 import 'package:quizz_app/widgets/game/game_answer.dart';
 import 'package:quizz_app/widgets/game/game_header.dart';

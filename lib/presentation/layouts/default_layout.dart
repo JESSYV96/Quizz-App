@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quizz_app/business_logic/joker/cubit/joker_cubit.dart';
-import 'package:quizz_app/business_logic/life/cubit/life_cubit.dart';
-import 'package:quizz_app/business_logic/score/cubit/score_cubit.dart';
+import 'package:quizz_app/business_logic/game_logic/joker/cubit/joker_cubit.dart';
+import 'package:quizz_app/business_logic/game_logic/life/cubit/life_cubit.dart';
+import 'package:quizz_app/business_logic/game_logic/score/cubit/score_cubit.dart';
+import 'package:quizz_app/business_logic/options_logic/vibration/cubit/vibration_cubit.dart';
 
 class DefaultLayout extends StatelessWidget {
   const DefaultLayout(
@@ -25,7 +26,10 @@ class DefaultLayout extends StatelessWidget {
         ),
         BlocProvider<ScoreCubit>(
           create: (context) => ScoreCubit(score: 0),
-        )
+        ),
+        BlocProvider<VibrationCubit>(
+          create: (context) => VibrationCubit(isVibrate: false),
+        ),
       ],
       child: Scaffold(
         appBar: this.appBar,

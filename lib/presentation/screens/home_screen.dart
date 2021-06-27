@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quizz_app/widgets/common_button.dart';
-import 'package:quizz_app/widgets/main_button.dart';
+import 'package:quizz_app/widgets/buttons/common_button.dart';
+import 'package:quizz_app/widgets/buttons/main_button.dart';
 
 import '../layouts/default_layout.dart';
 

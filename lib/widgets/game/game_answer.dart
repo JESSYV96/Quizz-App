@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../common_button.dart';
+import '../buttons/common_button.dart';
 
 class GameAnswer extends StatelessWidget {
   @override

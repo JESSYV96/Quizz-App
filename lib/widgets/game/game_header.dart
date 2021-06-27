@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quizz_app/business_logic/life/cubit/life_cubit.dart';
-import 'package:quizz_app/business_logic/score/cubit/score_cubit.dart';
+import 'package:quizz_app/business_logic/game_logic/life/cubit/life_cubit.dart';
+import 'package:quizz_app/business_logic/game_logic/score/cubit/score_cubit.dart';
 
 class GameHeader extends StatelessWidget {
   //const GameHeader({Key? key}) : super(key: key);
