@@ -27,6 +27,9 @@ dependencies:
   bloc:
   cupertino_icons: ^1.0.2
   flutter_vibrate: ^1.1.0
+  amplify_flutter: ^0.2.0-nullsafety.1
+  # amplify_api: "<1.0.0" // UNCOMMENT this line once backend is deployed
+  amplify_datastore: ^0.2.0-nullsafety.1
 
 dev_dependencies:
   flutter_test:
