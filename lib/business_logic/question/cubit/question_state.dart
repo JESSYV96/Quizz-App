@@ -12,3 +12,8 @@ class QuestionSuccess extends QuestionState {
 }
 
 class QuestionFailure extends QuestionState {}
+
+class QuestionForGame extends QuestionState {
+  List<Question> questions;
+  QuestionForGame({required this.questions});
+}
