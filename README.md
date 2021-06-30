@@ -1,5 +1,7 @@
 *** VraiFauxApp ***
 
+Sandbox : https://sandbox.amplifyapp.com/schema-design/6cb653a7-5f96-47e0-9668-d38469e6fb22
+
 Application de type Quiz affichant des questions VRAI/FAUX.
 
 

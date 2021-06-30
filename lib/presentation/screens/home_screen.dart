@@ -18,12 +18,19 @@ class HomeScreen extends StatelessWidget {
             children: [
               MainButton(
                 text: "Jouer",
-                routeName: '/game',
+                action: () {
+                  Navigator.pushNamed(context, '/game');
+                },
               ),
               SizedBox(height: 30),
               MainButton(text: "Classement"),
               SizedBox(height: 30),
-              MainButton(text: "Proposer une question"),
+              MainButton(
+                text: "Proposer une question",
+                action: () {
+                  Navigator.pushNamed(context, '/questions');
+                },
+              ),
             ],
           ),
           CommonButton(

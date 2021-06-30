@@ -5,7 +5,7 @@ import 'package:quizz_app/widgets/game/game_body.dart';
 import 'package:quizz_app/widgets/game/game_answer.dart';
 import 'package:quizz_app/widgets/game/game_header.dart';
 
-import '../layouts/default_layout.dart';
+import '../../layouts/default_layout.dart';
 
 class GameScreen extends StatefulWidget {
   @override

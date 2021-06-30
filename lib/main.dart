@@ -2,14 +2,16 @@ import 'package:amplify_datastore/amplify_datastore.dart';
 import 'package:amplify_flutter/amplify.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quizz_app/presentation/screens/questions/add_question_screen.dart';
 
 import 'amplifyconfiguration.dart';
 import 'business_logic/game_logic/level/cubit/level_cubit.dart';
 import 'models/ModelProvider.dart';
-import 'presentation/screens/game_screen.dart';
+import 'presentation/screens/game/game_screen.dart';
 import 'presentation/screens/home_screen.dart';
 import 'presentation/screens/loading_screen.dart';
 import 'presentation/screens/options_screen.dart';
+import 'presentation/screens/questions/questions_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -51,9 +53,11 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
-          '/': (context) => _amplifyConfigured ? HomeScreen() : LoadingScreen(),
+          '/': (context) => HomeScreen(),
           '/game': (context) => GameScreen(),
           '/options': (context) => OptionsScreen(),
+          '/questions': (context) => QuestionsScreen(),
+          '/questions/add': (context) => AddQuestionScreen(),
           '/loading': (context) => LoadingScreen(),
         },
         initialRoute: '/',

@@ -4,14 +4,20 @@ import 'package:quizz_app/business_logic/game_logic/joker/cubit/joker_cubit.dart
 import 'package:quizz_app/business_logic/game_logic/life/cubit/life_cubit.dart';
 import 'package:quizz_app/business_logic/game_logic/score/cubit/score_cubit.dart';
 import 'package:quizz_app/business_logic/options_logic/vibration/cubit/vibration_cubit.dart';
+import 'package:quizz_app/business_logic/question/cubit/question_cubit.dart';
 
 class DefaultLayout extends StatelessWidget {
   const DefaultLayout(
-      {Key? key, this.appBar, required this.screen, this.bottomBar})
+      {Key? key,
+      this.appBar,
+      required this.screen,
+      this.bottomBar,
+      this.floatingActionButton})
       : super(key: key);
 
   final AppBar? appBar;
   final BottomAppBar? bottomBar;
+  final FloatingActionButton? floatingActionButton;
   final Widget screen;
 
   @override
@@ -30,6 +36,9 @@ class DefaultLayout extends StatelessWidget {
         BlocProvider<VibrationCubit>(
           create: (context) => VibrationCubit(isVibrate: false),
         ),
+        BlocProvider<QuestionCubit>(
+          create: (context) => QuestionCubit()..getQuestions(),
+        ),
       ],
       child: Scaffold(
         appBar: this.appBar,
@@ -41,6 +50,7 @@ class DefaultLayout extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: this.bottomBar,
+        floatingActionButton: this.floatingActionButton,
       ),
     );
   }
