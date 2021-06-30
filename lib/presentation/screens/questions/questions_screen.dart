@@ -19,12 +19,12 @@ class QuestionsScreen extends StatelessWidget {
             final questions = state.questions;
             if (questions.isNotEmpty) {
               return Container(
+                margin: EdgeInsets.only(top: 15),
                 child: ListView.separated(
                     itemCount: questions.length,
                     separatorBuilder: (context, index) {
                       return Divider(
-                        height: 50,
-                        color: Colors.white,
+                        height: 20,
                       );
                     },
                     itemBuilder: (context, int index) {
@@ -35,9 +35,42 @@ class QuestionsScreen extends StatelessWidget {
                               .removeQuestion(questions[index]);
                         },
                         child: Container(
-                          child: Container(
-                            child: Text(
-                                '${questions[index].id.substring(0, 8)} ${questions[index].title}'),
+                          height: 60,
+                          padding: EdgeInsets.symmetric(horizontal: 15),
+                          decoration: new BoxDecoration(
+                            color: Color(0xFF05071B),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    questions[index].title,
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  Text(
+                                    'Réponse : ${(questions[index].answer ? 'Vrai' : 'Faux')}',
+                                    style: TextStyle(color: Colors.white),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Icon(Icons.sports, color: Colors.white),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 4),
+                                  ),
+                                  Icon(Icons.directions_off_outlined,
+                                      color: Colors.white),
+                                ],
+                              )
+                            ],
                           ),
                         ),
                       );
