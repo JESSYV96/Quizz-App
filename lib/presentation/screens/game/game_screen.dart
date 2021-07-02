@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quizz_app/business_logic/game_logic/game_questions/cubit/game_questions_cubit.dart';
 import 'package:quizz_app/business_logic/game_logic/joker/cubit/joker_cubit.dart';
+import 'package:quizz_app/models/Question.dart';
 import 'package:quizz_app/widgets/game/game_body.dart';
 import 'package:quizz_app/widgets/game/game_answer.dart';
 import 'package:quizz_app/widgets/game/game_header.dart';
@@ -70,13 +71,30 @@ class _GameScreenState extends State<GameScreen> {
     }
 
     return BlocProvider<GameQuestionsCubit>(
-      create: (context) => GameQuestionsCubit()..getQuestionsForGame(),
+      create: (gameQuestionsContext) =>
+          GameQuestionsCubit()..getStartedQuestionsForGame(),
       child: DefaultLayout(
         appBar: null,
         screen: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [GameHeader(), GameBody(), GameAnswer()],
+          child: BlocBuilder<GameQuestionsCubit, GameQuestionsState>(
+            builder: (gameContext, state) {
+              if (state is GameQuestions) {
+                final Question currentQuestion = state.questions[0];
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GameHeader(),
+                    GameBody(question: currentQuestion),
+                    GameAnswer(
+                      gameContext.read<GameQuestionsCubit>(), 
+                      question: currentQuestion,
+                      nbQuestions: state.questions.length,
+                      )
+                  ],
+                );
+              }
+              return Container();
+            },
           ),
         ),
         bottomBar: BottomAppBar(

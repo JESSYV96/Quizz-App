@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:quizz_app/models/Question.dart';
@@ -9,16 +7,24 @@ part 'game_questions_state.dart';
 
 class GameQuestionsCubit extends Cubit<GameQuestionsState> {
   final _questionRepository = QuestionRepository();
+  List<Question> gameQuestions = [];
 
-  GameQuestionsCubit() : super(GameQuestionsInitial());
+  GameQuestionsCubit() : super(GameQuestionsStart());
 
-  void getQuestionsForGame() async {
+  void getStartedQuestionsForGame() async {
     final questions = await _questionRepository.getAllQuestions();
-    final List<Question> gameQuestions =
-        questions.map((question) => question).toList();
-    emit(GameQuestionsStart(
-        questions: gameQuestions
-          ..shuffle()
-          ..toString()));
+    gameQuestions = questions.map((question) => question).toList()..shuffle();
+    emit(GameQuestions(questions: gameQuestions));
+  }
+
+  /*
+   * Remove question from gameQuestionslist 
+   * when the user answered this
+  */
+  void answerToQuestion({required String questionId}) {
+    print("you answered to the question");
+    gameQuestions.removeWhere((question) => question.id == questionId);
+    print(gameQuestions);
+    emit(GameQuestions(questions: gameQuestions));
   }
 }

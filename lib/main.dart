@@ -7,6 +7,7 @@ import 'package:quizz_app/presentation/screens/questions/add_question_screen.dar
 import 'amplifyconfiguration.dart';
 import 'business_logic/game_logic/level/cubit/level_cubit.dart';
 import 'models/ModelProvider.dart';
+import 'presentation/screens/game/game_score.dart';
 import 'presentation/screens/game/game_screen.dart';
 import 'presentation/screens/home_screen.dart';
 import 'presentation/screens/loading_screen.dart';
@@ -55,6 +56,7 @@ class _MyAppState extends State<MyApp> {
         routes: {
           '/': (context) => HomeScreen(),
           '/game': (context) => GameScreen(),
+          '/game/score': (context) => GameScore(),
           '/options': (context) => OptionsScreen(),
           '/questions': (context) => QuestionsScreen(),
           '/questions/add': (context) => AddQuestionScreen(),
