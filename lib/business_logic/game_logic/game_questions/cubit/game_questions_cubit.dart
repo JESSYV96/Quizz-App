@@ -21,10 +21,8 @@ class GameQuestionsCubit extends Cubit<GameQuestionsState> {
    * Remove question from gameQuestionslist 
    * when the user answered this
   */
-  void answerToQuestion({required String questionId}) {
-    print("you answered to the question");
-    gameQuestions.removeWhere((question) => question.id == questionId);
-    print(gameQuestions);
+  void answerToQuestion({required Question currentQuestion}) {
+    gameQuestions.removeWhere((question) => question.id == currentQuestion.id);
     emit(GameQuestions(questions: gameQuestions));
   }
 }

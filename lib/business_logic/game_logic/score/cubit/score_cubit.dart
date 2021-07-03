@@ -4,6 +4,11 @@ import 'package:meta/meta.dart';
 part 'score_state.dart';
 
 class ScoreCubit extends Cubit<ScoreState> {
-  final int score;
-  ScoreCubit({required this.score}) : super(ScoreInitial(score: score));
+  int score;
+  ScoreCubit({required this.score}) : super(ScoreStart());
+
+  void setScore() {
+    score = score += 10;
+    emit(Score(score: score));
+  }
 }

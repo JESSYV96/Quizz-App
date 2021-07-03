@@ -3,7 +3,12 @@ part of 'score_cubit.dart';
 @immutable
 abstract class ScoreState {}
 
-class ScoreInitial extends ScoreState {
+class ScoreStart extends ScoreState {
+  ScoreStart();
+}
+
+class Score extends ScoreState {
   final int score;
-  ScoreInitial({required this.score});
+ 
+  Score({required this.score});
 }

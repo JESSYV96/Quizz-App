@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quizz_app/business_logic/game_logic/life/cubit/life_cubit.dart';
 import 'package:quizz_app/business_logic/game_logic/score/cubit/score_cubit.dart';
 
 class GameHeader extends StatelessWidget {
-  //const GameHeader({Key? key}) : super(key: key);
-
+  final ScoreCubit scoreContext;
+  final int lifeNumber;
+  GameHeader({required this.lifeNumber, required this.scoreContext}) : super();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,28 +29,21 @@ class GameHeader extends StatelessWidget {
               ),
               Row(
                 children: [
-                  BlocBuilder<LifeCubit, LifeState>(
-                    builder: (context, state) {
-                      if (state is LifeInitial) {
-                        return Container(
-                          height: 25,
-                          child: ListView.builder(
-                              itemCount: state.lifeNumber,
-                              scrollDirection: Axis.horizontal,
-                              shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              itemBuilder: (context, int index) {
-                                return Icon(
-                                  Icons.favorite_rounded,
-                                  size: 30,
-                                  color: Colors.white,
-                                );
-                              }),
-                        );
-                      }
-                      return Container();
-                    },
-                  ),
+                  Container(
+                    height: 25,
+                    child: ListView.builder(
+                        itemCount: lifeNumber,
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, int index) {
+                          return Icon(
+                            Icons.favorite_rounded,
+                            size: 30,
+                            color: Colors.white,
+                          );
+                        }),
+                  )
                 ],
               )
             ],
@@ -67,17 +59,13 @@ class GameHeader extends StatelessWidget {
                   fontSize: 12,
                 ),
               ),
-              BlocBuilder<ScoreCubit, ScoreState>(
-                builder: (scoreContext, state) {
-                  return Text(
-                    '${scoreContext.read<ScoreCubit>().score}',
-                    style: TextStyle(
-                      fontSize: 28,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  );
-                },
+              Text(
+                '${scoreContext.score}',
+                style: TextStyle(
+                  fontSize: 28,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ],
           ),

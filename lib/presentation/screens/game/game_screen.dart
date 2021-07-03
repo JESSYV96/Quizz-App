@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quizz_app/business_logic/game_logic/game_questions/cubit/game_questions_cubit.dart';
 import 'package:quizz_app/business_logic/game_logic/joker/cubit/joker_cubit.dart';
+import 'package:quizz_app/business_logic/game_logic/life/cubit/life_cubit.dart';
+import 'package:quizz_app/business_logic/game_logic/score/cubit/score_cubit.dart';
 import 'package:quizz_app/models/Question.dart';
+import 'package:quizz_app/presentation/screens/game/game_score.dart';
 import 'package:quizz_app/widgets/game/game_body.dart';
 import 'package:quizz_app/widgets/game/game_answer.dart';
 import 'package:quizz_app/widgets/game/game_header.dart';
@@ -76,24 +79,43 @@ class _GameScreenState extends State<GameScreen> {
       child: DefaultLayout(
         appBar: null,
         screen: Container(
-          child: BlocBuilder<GameQuestionsCubit, GameQuestionsState>(
-            builder: (gameContext, state) {
-              if (state is GameQuestions) {
-                final Question currentQuestion = state.questions[0];
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GameHeader(),
-                    GameBody(question: currentQuestion),
-                    GameAnswer(
-                      gameContext.read<GameQuestionsCubit>(), 
-                      question: currentQuestion,
-                      nbQuestions: state.questions.length,
-                      )
-                  ],
-                );
-              }
-              return Container();
+          child: BlocBuilder<ScoreCubit, ScoreState>(
+            builder: (scoreContext, scoreState) {
+              return BlocBuilder<LifeCubit, LifeState>(
+                builder: (lifeContext, state) {
+                  return BlocBuilder<GameQuestionsCubit, GameQuestionsState>(
+                    builder: (gameContext, state) {
+                      if (state is GameQuestions) {
+                        if (state.questions.isNotEmpty) {
+                          final Question currentQuestion = state.questions[0];
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GameHeader(
+                                scoreContext: scoreContext.read<ScoreCubit>(),
+                                lifeNumber:
+                                    lifeContext.read<LifeCubit>().lifeNumber,
+                              ),
+                              GameBody(question: currentQuestion),
+                              GameAnswer(
+                                gameContext:
+                                    gameContext.read<GameQuestionsCubit>(),
+                                lifeContext: lifeContext.read<LifeCubit>(),
+                                scoreContext: scoreContext.read<ScoreCubit>(),
+                                question: currentQuestion,
+                                nbQuestions: state.questions.length,
+                              )
+                            ],
+                          );
+                        } else {
+                          return GameScore();
+                        }
+                      }
+                      return Container();
+                    },
+                  );
+                },
+              );
             },
           ),
         ),
