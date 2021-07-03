@@ -23,14 +23,11 @@ class GameAnswer extends StatelessWidget {
 
   void answerHandler(BuildContext context, {required bool userAnswer}) {
     gameContext.answerToQuestion(currentQuestion: question);
-    if (lifeContext.lifeNumber > 1) {
-      if (userAnswer == question.answer) {
-        scoreContext.setScore();
-      } else {
-        lifeContext.setLife();
-      }
+
+    if (userAnswer == question.answer) {
+      scoreContext.setScore();
     } else {
-      Navigator.pushNamed(context, '/game/score');
+      lifeContext.setLife();
     }
   }
 

@@ -82,11 +82,15 @@ class _GameScreenState extends State<GameScreen> {
           child: BlocBuilder<ScoreCubit, ScoreState>(
             builder: (scoreContext, scoreState) {
               return BlocBuilder<LifeCubit, LifeState>(
-                builder: (lifeContext, state) {
+                builder: (lifeContext, lifeState) {
                   return BlocBuilder<GameQuestionsCubit, GameQuestionsState>(
                     builder: (gameContext, state) {
-                      if (state is GameQuestions) {
-                        if (state.questions.isNotEmpty) {
+                      if (state is GameQuestions && lifeState is LifeInitial) {
+                        final int lifeNumber =
+                            lifeContext.read<LifeCubit>().lifeNumber;
+                        if (lifeNumber == 0 || state.questions.isEmpty) {
+                          return GameScore();
+                        } else {
                           final Question currentQuestion = state.questions[0];
                           return Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -107,8 +111,6 @@ class _GameScreenState extends State<GameScreen> {
                               )
                             ],
                           );
-                        } else {
-                          return GameScore();
                         }
                       }
                       return Container();
